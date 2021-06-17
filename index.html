@@ -21,7 +21,7 @@
         <h1>Weather Dashboard</h1>
     </div>
     <!-- Sidebar -->
-    <div class="flex-column align-self-stretch justify-content-center p-3 text-white bg-dark" id="sb" width="280px">
+    <div class="flex-column align-self-stretch justify-content-center p-3 text-white bg-dark" id="sb" width="250px">
         <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <i class="fab fa-github bi me-2" width="16" height="16"></i>
             <span class="fs-4"> Search for a City: </span>
@@ -39,12 +39,12 @@
         class="nav nav-pills flex-column mb-auto scrollspy-example" id="sidebar"style="height:100%;">
         </ul>
     </div>
-    <div class="d-flex flex-column justify-content-around flex-fill" id="forecast">
-        <!-- Daily Forecast -->
+    <div class="d-flex flex-column justify-content-around flex-fill">
+        <!-- Daily Forecast container-->
         <div id="daily" class="d-flex flex-column align-self-center"></div>
+        <!-- 5 Day Forecast container-->
+        <div id="five-days" class="d-flex justify-content-evenly"></div>
 
-        <!-- 5 Day Forecast -->
-        <div id="five-days" class="d-flex flex-column align-self-center" height="300px" width="300px"></div>
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
