@@ -1,33 +1,49 @@
-/*
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white" aria-current="page">
-                <i class="fas fa-home bi me-2" width="16" height="16"></i>
-                Home
-            </a>
-          </li>
-*/
-
 /*------  Variables  -------- */
 var sideBarEl = $('#sidebar');
 var myAlert = $('.alert');
 var dailyEl = $('#daily');
-var forecastEl = $('#five-days');
+var fiveDaysContainerEl =$('#five-days-container');
+var fiveDaysEl = $('#five-days');
+var fiveDaysHeaderEl = $('#five-days-header');
 var date = moment().format("dddd, MMMM Do YYYY");
 var dateUnix = moment().unix();
 
-var sidebarArray = Array(0);
+var sidebarArray;
+
+//localStorage.clear();
+onload();
 
 function renderSidebarItem(city, icon){
     var listItem = $('<li>');
-    var a = $('<a class="nav-link text-white">');
+    var a = $('<a class="nav-link text-white" style="cursor:pointer;">');
     var image = $(`<image width="50px" height="50px" src="http://openweathermap.org/img/wn/${icon}@2x.png"/>`);
     var span = $('<span>');
     span.text(city);
+    listItem.attr('city', city);
+    image.attr('city', city);
+    a.attr('city', city);
+    span.attr('city', city);
 
-    sideBarEl.append(listItem);
-    sideBarEl.append(a);
     a.append(image);
     a.append(span);
+    listItem.append(a);
+    sideBarEl.append(listItem);
+}
+
+function onload(){
+    console.log(localStorage);
+    var input = JSON.parse(localStorage.getItem('sidebar'));
+    if(input == null){
+        sidebarArray = Array(0);
+        console.log("Nothing in local storage");
+    }
+    else{
+        sidebarArray = input;
+        for(let i = 0; i < sidebarArray.length; i++){
+            renderSidebarItem(sidebarArray[i].city, sidebarArray[i].icon);
+        }
+    }
+    
 }
 
 function uviColor(uvi){
@@ -37,7 +53,7 @@ function uviColor(uvi){
     else{return "green";}
 }
 
-function renderDailyForecast(city, temp, wind, humidity, uvi){
+function renderCurrentForecast(city, temp, wind, humidity, uvi){
     //Add border to the div
     dailyEl.addClass('daily');
     
@@ -52,12 +68,11 @@ function renderDailyForecast(city, temp, wind, humidity, uvi){
     //Style them
     cityEl.text(`${city} (${date})`);
     tempEl.text(`Temp: ${temp} °F`);
-    windEl.text(`Wind: ${wind} MPH`);
+    windEl.text(`Wind: ${Math.floor(wind)} MPH`);
     humidityEl.text(`Humidity: ${humidity} %`);
     uviEl.text(`UV Index: `);
     uviSpanEl.text(uvi);
-    uviSpanEl.css({'text-shadow': '2px 2px black',
-    'padding':'4px','margin-left':'5px','color':'white', 'background': uviColor(uvi)})
+    uviSpanEl.css({'padding':'4px','margin-left':'5px','color':'black', 'background': uviColor(uvi)})
 
     //Append them
     dailyEl.append(cityEl);
@@ -67,25 +82,14 @@ function renderDailyForecast(city, temp, wind, humidity, uvi){
     dailyEl.append(uviEl);
     uviEl.append(uviSpanEl);
 
-    //Put info into object
-    var dailyObj = {
-        city: city,
-        temp: temp,
-        wind: wind,
-        humidity: humidity,
-        uvi: uvi   
-    };
 
-
-    //Push object into array
-    sidebarArray.push(dailyObj);
 }
 
 function renderFiveDayForecast(day, temp, wind, humidity, icon){
     
     //Create elements
-    var singleForecastEl = $('<div>');
-    var dayEl = $('<h4>');
+    var singleDayEl = $('<div>');
+    var dayEl = $('<h5>');
     var iconEl = $(`<image width="50px" height="50px" 
     src="http://openweathermap.org/img/wn/${icon}@2x.png"/>`);
     var tempEl = $('<p>');
@@ -93,20 +97,19 @@ function renderFiveDayForecast(day, temp, wind, humidity, icon){
     var humidityEl = $('<p>');
 
     //Style them
-    singleForecastEl.addClass('single_forecast');
+    singleDayEl.addClass('single_forecast');
     dayEl.text(day);
     tempEl.text(`Temp: ${temp} °F`);
-    windEl.text(`Wind: ${wind} MPH`);
+    windEl.text(`Wind: ${Math.floor(wind)} MPH`);
     humidityEl.text(`Humidity: ${humidity} %`);
 
     //Append them
-    forecastEl.append(singleForecastEl);
-    singleForecastEl.append(dayEl);
-    singleForecastEl.append(iconEl);
-    singleForecastEl.append(tempEl);
-    singleForecastEl.append(windEl);
-    singleForecastEl.append(humidityEl);
-    
+    fiveDaysEl.append(singleDayEl);
+    singleDayEl.append(dayEl);
+    singleDayEl.append(iconEl);
+    singleDayEl.append(tempEl);
+    singleDayEl.append(windEl);
+    singleDayEl.append(humidityEl);
 }
 
 function callWeatherAPI(lat, lon, city){
@@ -118,28 +121,53 @@ function callWeatherAPI(lat, lon, city){
     .then(function (data) {
         console.log('Fetch Response \n-------------');
         console.log(data);
-        console.log(`${city} (${date})`);
-        console.log(`Temp: ${data.current.temp} °F`);
-        console.log(`Wind: ${data.current.wind_speed} MPH`);
-        console.log(`Humidity: ${data.current.humidity} %`);
-        console.log(`UV Index: ${data.current.uvi}`);
-        console.log(`Current weather icon code: ${data.current.weather[0].icon}`);
+        // console.log(`${city} (${date})`);
+        // console.log(`Temp: ${data.current.temp} °F`);
+        // console.log(`Wind: ${data.current.wind_speed} MPH`);
+        // console.log(`Humidity: ${data.current.humidity} %`);
+        // console.log(`UV Index: ${data.current.uvi}`);
+        // console.log(`Current weather icon code: ${data.current.weather[0].icon}`);
         
+        console.log(sidebarArray);
+        //console.log(`Is it the list? : ${sidebarArray.includes(city)}`);
+        var sidebarFlag = false;
+        for(let i = 0; i < sidebarArray.length; i++){
+            if(sidebarArray[i].city === city){
+                sidebarFlag = true;
+            }
+        }
 
-        renderSidebarItem(city, data.current.weather[0].icon);
-
-        renderDailyForecast(city, data.current.temp, data.current.wind_speed, 
+        if(!sidebarFlag){
+            renderSidebarItem(city, data.current.weather[0].icon);
+            var sidebarObj = {
+                city: city,
+                icon: data.current.weather[0].icon                
+            } 
+            sidebarArray.push(sidebarObj);
+            localStorage.clear();
+            localStorage.setItem('sidebar', JSON.stringify(sidebarArray));
+            console.log(sidebarArray);
+        }
+        //Render the current forecast
+        renderCurrentForecast(city, data.current.temp, data.current.wind_speed, 
         data.current.humidity, data.current.uvi);
-    
-        for(let i = 0; i < 5; i++){
+        
+        //Add text to 5-Day Forecast header
+        fiveDaysHeaderEl.text("5 Day Forecast");
+
+        //Loop to generate the 5 day forecast
+        for(let i = 1; i < 6; i++){
             console.log(`Day: ${moment.unix(data.daily[i].dt).format("dddd")}`);
             renderFiveDayForecast(moment.unix(data.daily[i].dt).format("dddd"), data.daily[i].temp.max, data.daily[i].wind_speed, 
                 data.daily[i].humidity, data.daily[i].weather[0].icon);
         }
+        
+
     });
 }
 
 function callLongLatAPI(city){
+    if(city.length == 0){return;}
     var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=cad244ae874e38b72816daf9b6f1a70f`;
     fetch(requestUrl)
     .then(function (response) {
@@ -163,9 +191,19 @@ var searchBtnEventHandler = function(event){
         return;
     }
     dailyEl.removeClass('daily');
-    forecastEl.empty();
+    fiveDaysHeaderEl.text("");
+    fiveDaysEl.empty();
     dailyEl.empty();
     callLongLatAPI($("input[aria-label='city']").val());
+}
+
+var sidebarBtnHandler = function(event){
+    console.log(`Cliked ${$(event.target).attr('city')} link!!!`);
+    dailyEl.removeClass('daily');
+    fiveDaysHeaderEl.text("");
+    fiveDaysEl.empty();
+    dailyEl.empty();
+    callLongLatAPI($(event.target).attr('city'));
 }
 
 var closeAlertHandler = function(){
@@ -181,3 +219,4 @@ var displayNone = function(){
 
 $('#button-addon2').on('click', searchBtnEventHandler);
 myAlert.on('closed.bs.alert', displayNone);
+sideBarEl.on('click', $("[city]"), sidebarBtnHandler)

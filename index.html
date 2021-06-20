@@ -21,7 +21,7 @@
         <h1>Weather Dashboard</h1>
     </div>
     <!-- Sidebar -->
-    <div class="flex-column align-self-stretch justify-content-center p-3 text-white bg-dark" id="sb" width="250px">
+    <div class="d-inline-flex flex-column align-self-stretch justify-content-center p-3 text-white bg-dark" id="sb" width="230px">
         <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <i class="fab fa-github bi me-2" width="16" height="16"></i>
             <span class="fs-4"> Search for a City: </span>
@@ -32,18 +32,21 @@
         </div>
         <div class="input-group my-3">
             <input type="text" class="form-control" placeholder="San Diego" aria-label="city" aria-describedby="button-addon2">
-            <button class="btn btn-outline-light" type="button" id="button-addon2">Button</button>
+            <button class="btn btn-outline-light" type="button" id="button-addon2">Search</button>
           </div>
         <hr>
         <ul data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" tabindex="0" 
         class="nav nav-pills flex-column mb-auto scrollspy-example" id="sidebar"style="height:100%;">
         </ul>
     </div>
-    <div class="d-flex flex-column justify-content-around flex-fill">
+    <div class="d-flex flex-column align-items-center flex-fill p-2">
         <!-- Daily Forecast container-->
-        <div id="daily" class="d-flex flex-column align-self-center"></div>
+        <div id="daily" class="d-flex flex-column"></div>
         <!-- 5 Day Forecast container-->
-        <div id="five-days" class="d-flex justify-content-evenly"></div>
+        <div id="five-days-container" class="d-flex flex-column align-items-center" >
+            <h3 id="five-days-header" class="align-self-baseline"></h3>
+            <div id="five-days" class="d-flex justify-content-evenly"></div>
+        </div>
 
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>

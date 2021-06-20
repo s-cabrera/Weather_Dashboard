@@ -4,6 +4,8 @@ body{
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: flex-start;
+    background-color: rgb(29, 29, 29);
+    color: white;
 }
 h1{
     margin-bottom: 2px;
@@ -16,16 +18,13 @@ h1{
 
 .daily{
     display: 'none';
-    padding: 20px;
+    padding: 5px 19px;
     font-family: 'Montserrat', sans-serif;
-    border:2px solid rgb(46, 46, 46);
-    color: black;
+    border:2px solid white;
+    color: white;
 }
 
-#five-days{
-    font-family: 'Montserrat', sans-serif;
-    color: black;
-}
+
 .nav-link{
     padding: 0.1rem 1rem;
     border-bottom: 1px solid #dee2e6!important;
@@ -48,4 +47,14 @@ hr{
     background-color: rgb(35, 81, 119);
     color: white;
     padding:8px;
+    margin: 0px 12px;
+    font-size: 100%;
+}
+
+#five-days-container{
+    padding: 8px;
+    font-size: 100%;
+}
+#five-days-header{
+    margin-left:12px;
 }
