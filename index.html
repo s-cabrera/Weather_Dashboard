@@ -27,7 +27,8 @@
             <span class="fs-4"> Search for a City: </span>
         </div>           
         <div class="alert alert-danger alert-dismissible fade show" style="display: none;" role="alert">
-                <strong>Error</strong> Type a city in the search bar below
+                <strong id="alertStrong"></strong>
+                <p id="alertP"></p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <div class="input-group my-3">
@@ -35,10 +36,10 @@
             <button class="btn btn-outline-light" type="button" id="button-addon2">Search</button>
           </div>
         <hr>
-        <ul data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" tabindex="0" 
-        class="nav nav-pills flex-column mb-auto scrollspy-example" id="sidebar"style="height:100%;">
+        <ul class="nav nav-pills flex-column mb-auto scrollspy-example" id="sidebar"style="height:100%;">
         </ul>
     </div>
+    <!-- Forecast container -->
     <div class="d-flex flex-column align-items-center flex-fill p-2">
         <!-- Daily Forecast container-->
         <div id="daily" class="d-flex flex-column"></div>

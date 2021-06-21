@@ -1,6 +1,8 @@
 /*------  Variables  -------- */
 var sideBarEl = $('#sidebar');
 var myAlert = $('.alert');
+var myAlertStrong = $('#alertStrong');
+var myAlertP= $('#alertP');
 var dailyEl = $('#daily');
 var fiveDaysContainerEl =$('#five-days-container');
 var fiveDaysEl = $('#five-days');
@@ -112,6 +114,13 @@ function renderFiveDayForecast(day, temp, wind, humidity, icon){
     singleDayEl.append(humidityEl);
 }
 
+function displayAlert(strong, p){
+    console.log("Display alert");
+    myAlertStrong.text(strong);
+    myAlertP.text(p);
+    myAlert.css("display","block");
+}
+
 function callWeatherAPI(lat, lon, city){
     var requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=cad244ae874e38b72816daf9b6f1a70f` 
     fetch(requestUrl)
@@ -171,9 +180,15 @@ function callLongLatAPI(city){
     var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=cad244ae874e38b72816daf9b6f1a70f`;
     fetch(requestUrl)
     .then(function (response) {
+        console.log(response.status);
+        if(response.status == 404){
+            displayAlert("", "Invaid Input");
+            return null;
+        }
         return response.json();
     })
     .then(function (data) {
+    if(data == null){console.log("Data was null");return;}
     console.log('Fetch Response \n-------------');
     console.log(`callWeatherAPI(${data.coord.lon}, ${data.coord.lat})`)
     if(data != null){
@@ -185,9 +200,7 @@ function callLongLatAPI(city){
 var searchBtnEventHandler = function(event){
     console.log($("input[aria-label='city']").val());
     if($("input[aria-label='city']").val().length === 0){
-        console.log("Display alert");
-
-        myAlert.css("display","block");
+        displayAlert("Error", "type a city in the search bar");
         return;
     }
     dailyEl.removeClass('daily');
