@@ -229,7 +229,6 @@ var searchBtnEventHandler = function(event){
 }
 
 var sidebarItemHandler = function(event){
-    event.stopPropagation();
     console.log(`Cliked ${$(event.target).attr('city')} link!!!`);
     dailyEl.removeClass('daily');
     fiveDaysHeaderEl.text("");
