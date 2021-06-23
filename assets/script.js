@@ -229,6 +229,7 @@ var searchBtnEventHandler = function(event){
 }
 
 var sidebarItemHandler = function(event){
+    event.stopPropagation();
     console.log(`Cliked ${$(event.target).attr('city')} link!!!`);
     dailyEl.removeClass('daily');
     fiveDaysHeaderEl.text("");
@@ -265,5 +266,5 @@ var displayNone = function(){
 
 $('#button-addon2').on('click', searchBtnEventHandler);
 myAlert.on('closed.bs.alert', displayNone);
-sidebarEl.children(0).on('click', sidebarItemHandler)
-$('.sidebarBtn').on('click', sidebarBtnHandler)
+sidebarEl.children(0).on('click', sidebarItemHandler);
+$('.sidebarBtn').on('click', sidebarBtnHandler);
