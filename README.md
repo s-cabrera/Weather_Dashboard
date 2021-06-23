@@ -9,7 +9,7 @@ This uses the [OpenWeather One Call API](https://openweathermap.org/api/one-call
 
 The following image shows the web application's appearance and functionality:
 
-![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./assets/06-server-side-apis-homework-demo.png)
+![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./assets/demo.gif)
 
 
 ## URLs
