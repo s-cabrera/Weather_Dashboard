@@ -21,7 +21,7 @@
         <h1>Weather Dashboard</h1>
     </div>
     <!-- Sidebar -->
-    <div class="d-inline-flex flex-column align-self-stretch justify-content-center p-3 text-white bg-dark" id="sb" width="230px">
+    <div class="d-flex flex-column align-self-stretch justify-content-center p-3 text-white bg-dark" id="sb" width="230px">
         <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <i class="fab fa-github bi me-2" width="16" height="16"></i>
             <span class="fs-4"> Search for a City: </span>
@@ -31,13 +31,14 @@
                 <p id="alertP"></p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <div class="input-group my-3">
+        <form class="input-group my-3">
             <input type="text" class="form-control" placeholder="San Diego" aria-label="city" aria-describedby="button-addon2">
-            <button class="btn btn-outline-light" type="button" id="button-addon2">Search</button>
-          </div>
+            <button class="btn btn-outline-light" type="submit" id="button-addon2">Search</button>
+        </form>
         <hr>
-        <ul class="nav nav-pills flex-column mb-auto scrollspy-example" id="sidebar"style="height:100%;">
-        </ul>
+        <div class="list-group flex-column mb-auto" style="overflow-y:auto;" height="100%">
+            <ul class="list-group flex-column mb-auto" id="sidebar" height="100%"></ul>
+        </div>
     </div>
     <!-- Forecast container -->
     <div class="d-flex flex-column align-items-center flex-fill p-2">

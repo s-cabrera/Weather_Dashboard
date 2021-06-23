@@ -27,7 +27,6 @@ h1{
 
 .nav-link{
     padding: 0.1rem 1rem;
-    border-bottom: 1px solid #dee2e6!important;
 }
 
 hr{
@@ -58,3 +57,26 @@ hr{
 #five-days-header{
     margin-left:12px;
 }
+
+.sidebarBtn{
+    font-weight: 700;
+    background-color: #949494;
+}
+
+li{
+    border-bottom: 1px solid #dee2e6!important;
+    height: fit-content;
+}
+
+.sidebar-link{
+    cursor:pointer; 
+    width: 80%;
+    margin-right: 8%;
+    text-decoration: none;
+}
+
+/* .list-group-item-action {
+    width: 100%;
+    color: #4a515c;
+    text-align: inherit;
+} */
