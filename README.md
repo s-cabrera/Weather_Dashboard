@@ -4,6 +4,14 @@
 
 This weather dashboard uses the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for a city the user enters in the search bar. It displays that city's current forecast and the forecast for the next 5 days. It uses `localStorage` to store the list of recent cities the user searched.
 
+## Technologies Used
+* HTML
+* CSS
+* Bootstrap
+* JavaScript
+* Moment.js
+* JQuery
+* OpenWeather One Call API
 
 ## Deployed Application
 
