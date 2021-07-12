@@ -19,7 +19,7 @@ The following image shows the web application's appearance and functionality:
 * The URL of the GitHub repository: [https://github.com/s-cabrera/Weather_Dashboard](https://github.com/s-cabrera/Weather_Dashboard)
 
 ## Contact Information
-# Stephanie Cabrera
+### Stephanie Cabrera
 * Email: stephanie.cabrera.333@gmail.com
 * Phone: (626) 581-6930
 * LinkedIn: https://www.linkedin.com/in/stephanie-cabrera-809999139/
